@@ -15,7 +15,7 @@ class prpcrypt():
         self.key = key
         self.mode = AES.MODE_CBC
         self.length = 16
-
+    #used to turn a explicit code to an encoded code
     def encrypt(self, text):
         cryptor = AES.new(self.key, self.mode, self.key)
         count = len(text)
@@ -29,9 +29,10 @@ class prpcrypt():
 
 class SQLiteAuthenticator(Authenticator):
     def _verify_password(self, username, password):
+        #connect to the sqlite-db
         encryptor = prpcrypt()
         sql_cnn = sqlite3.connect(os.getenv('JUPYTERHUB_SQLITEDB_PATH'))
-        print("connect sqlitedb sucessfully")
+        print("connect sqlite-db sucessfully")
         cursor = sql_cnn.cursor()
         sql = ("SELECT `password` FROM `users` WHERE `username` = '{}'").format(username)  # select from the database
         # print(sql)
