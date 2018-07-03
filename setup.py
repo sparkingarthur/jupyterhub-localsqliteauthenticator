@@ -12,6 +12,6 @@ setup(name='sqliteauthenticator',
       packages=['sqliteauthenticator'],
       install_requires=[
         'jupyterhub',
-		'Crypto'
+		'pycrypto'
       ],
       )
