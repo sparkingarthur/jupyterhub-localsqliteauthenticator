@@ -10,7 +10,7 @@ from binascii import b2a_hex, a2b_hex
 import sqlite3
 
 class prpcrypt():
-    def __init__(self, key='jupyterhub'):
+    def __init__(self, key='jupyterhubkeykey'):
         self.key = key
         self.mode = AES.MODE_CBC
         self.length = 16
