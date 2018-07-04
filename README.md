@@ -1,8 +1,7 @@
-# Jupyterhub-SQLAuthenticator
-> Authenticate Jupyterhub with a MySQL user database
-
+# Jupyterhub-SQLiteAuthenticator
+> Authenticate Jupyterhub with a sqlite3 user database
+> Author: sparkingarthur@163.com
 ## Installation
-
 Run this command to install:
 
 ```
@@ -18,7 +17,8 @@ c.JupyterHub.authenticator_class = 'sqliteauthenticator.SQLiteAuthenticator'
 Additionally, set the following environment variables to point to your Sqlite3 users database:
 
 - `JUPYTERHUB_SQLITEDB_PATH` - path of sqlite db-file
-e.g. export JUPYTERHUB_SQLITEDB_PATH=/etc/jupyterhub/jupyterhub-users.db
+e.g. export JUPYTERHUB_SQLITEDB_PATH=/etc/jupyterhub/jupyterhub-users.db 
+
 
 ## Usage
 
@@ -26,4 +26,5 @@ The database defined in `JUPYTERHUB_SQLITEDB_PATH` should have a table called `u
 
 - `username` should contain the plaintext username to be used by Jupyterhub
 - `password` should contain the user password with ASE method ( http://chrissimpkins.github.io/crypto/ )
+-  The setup.py script will setup a default sqlite db( with path in /etc/jupyterhub/jupyterhub-users.db), where the table `users` will have only one user 'admin' with password '' ,you can change the password of 'admin' and try to use the methods in sqliteoperator-te.py to add more users (see test examples in sqliteoperator-te.py).
 	
