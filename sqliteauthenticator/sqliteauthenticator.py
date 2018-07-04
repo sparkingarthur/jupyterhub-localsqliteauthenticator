@@ -1,5 +1,5 @@
 # coding=utf-8
-from jupyterhub.auth import Authenticator
+from jupyterhub.auth import LocalAuthenticator
 from tornado import gen
 
 
@@ -28,25 +28,25 @@ class prpcrypt():
         return b2a_hex(self.ciphertext)
 
 
-class SQLiteAuthenticator(Authenticator):
+class SQLiteAuthenticator(LocalAuthenticator):
     def __init__(self, **kwargs):
         super(SQLiteAuthenticator, self).__init__(**kwargs)
         self.admin_mode = False
-    def _verify_password(self, username, password):
+    def _verify_password(self, username, password):##server will call this function so use try_catch statement
         #connect to the sqlite-db
         try:
             encryptor = prpcrypt()
             sql_cnn = sqlite3.connect(os.getenv('JUPYTERHUB_SQLITEDB_PATH'))
-            print("connect sqlite-db sucessfully")
+            #print("connect sqlite-db sucessfully")
             cursor = sql_cnn.cursor()
             sql = ("SELECT `password` FROM users WHERE `username` = '{}'").format(username)  # select from the database
-            print(sql)
+            #print(sql)
             cursor.execute(sql)
             user_password = cursor.fetchone()[0]  # first to check the username
-            print(user_password)
+            #print(user_password)
             input_password = encryptor.encrypt(password).decode()
-            print(input_password)
-            print(user_password == input_password)
+            #print(input_password)
+            #print(user_password == input_password)
             if user_password == input_password:
                 cursor.close()
                 sql_cnn.close()
@@ -102,8 +102,10 @@ class SQLiteAuthenticator(Authenticator):
             c.close()
             sql_cnn.close()
             userpath = ('/home/{}').format(username)
-            if not os.path.exists(userpath):
-                os.makedirs(userpath)
+            if not os.path.exists(userpath): #in case add_user in jupyterhub failed
+                os.system('useradd %s -s /bin/bash' % (username))
+                os.system('mkdir /home/%s' % (username))
+                os.system('chown -R %s /home/%s' % (username, username))
         else:
             print("only admin has the privilege")
 
