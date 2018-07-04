@@ -29,7 +29,7 @@ class prpcrypt():
 
 class SQLiteAuthenticator(Authenticator):
     def __init__(self):
-        super(Authenticator).__init__()
+        super(SQLiteAuthenticator,self).__init__()
         self.admin_mode = False
     def _verify_password(self, username, password):
         #connect to the sqlite-db
