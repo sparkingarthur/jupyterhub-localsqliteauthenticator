@@ -104,7 +104,7 @@ class SQLiteAuthenticator(LocalAuthenticator):
             userpath = ('/home/{}').format(username)
             if not os.path.exists(userpath): #in case add_user in jupyterhub failed
                 os.system('useradd %s -s /bin/bash' % (username))
-                os.system('mkdir /home/%s' % (username))
+                #os.system('mkdir /home/%s' % (username))
                 os.system('chown -R %s /home/%s' % (username, username))
         else:
             print("only admin has the privilege")

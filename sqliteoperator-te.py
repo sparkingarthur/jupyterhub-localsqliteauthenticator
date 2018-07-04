@@ -7,7 +7,7 @@ import traceback
 def _test():
     authenticator = SQLiteAuthenticator()
     authenticator.login_as_admin()
-    # authenticator.sqlite_add_user(username='test_1', password='789456123')  # passed
+    authenticator.sqlite_add_user(username='test_1', password='789456123')  # passed
     # authenticator.sqlite_update_password('test_1') # passed
     # authenticator.sqlite_add_user(username='lishijie009', password='123456')
     # authenticator.sqlite_delete_user(username='test_1')   # passed
