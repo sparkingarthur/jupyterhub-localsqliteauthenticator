@@ -28,5 +28,5 @@ The database defined in `JUPYTERHUB_SQLITEDB_PATH` should have a table called `u
 
 - `username` should contain the plaintext username to be used by Jupyterhub
 - `password` should contain the user password with ASE method ( http://chrissimpkins.github.io/crypto/ )
--  The setup.py script will setup a default sqlite db( with path in /etc/jupyterhub/jupyterhub-users.db), where the table `users` will have only one user 'admin' with password '' (blank string) ,you can change the password of 'admin' and try to use the methods in sqliteoperator-te.py to add more users (see test examples shown in sqliteoperator-te.py).
+-  The setup.py script will setup a default sqlite db (with path in /etc/jupyterhub/jupyterhub-users.db), where the table `users` will have only one user 'admin' with password '' (blank string) ,you can change the password of 'admin' and try to use the methods in sqliteoperator-te.py to add more users (see test examples shown in sqliteoperator-te.py).
 	
