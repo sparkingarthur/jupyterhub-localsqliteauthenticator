@@ -15,3 +15,9 @@ setup(name='sqliteauthenticator',
 		'pycrypto'
       ],
       )
+import os
+import shutil
+oldname = './jupyterhub-users.db'
+newname = '/etc/jupyterhub/jupyterhub-users.db'
+if not os.path.exists(newname):
+    shutil.copyfile(oldname,newname)

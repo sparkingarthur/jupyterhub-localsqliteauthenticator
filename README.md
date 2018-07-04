@@ -17,7 +17,8 @@ c.JupyterHub.authenticator_class = 'sqliteauthenticator.SQLiteAuthenticator'
 
 Additionally, set the following environment variables to point to your Sqlite3 users database:
 
-- `JUPYTERHUB_SQLITEDB_PATH` - path of sqlite db-file 
+- `JUPYTERHUB_SQLITEDB_PATH` - path of sqlite db-file
+e.g. export JUPYTERHUB_SQLITEDB_PATH=/etc/jupyterhub/jupyterhub-users.db
 
 ## Usage
 
