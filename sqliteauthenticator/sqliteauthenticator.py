@@ -9,7 +9,7 @@ from Crypto.Cipher import AES
 from binascii import b2a_hex, a2b_hex
 
 import sqlite3
-
+import traceback
 
 class prpcrypt():
     def __init__(self, key='jupyterhubkeykey'):
@@ -37,21 +37,22 @@ class SQLiteAuthenticator(Authenticator):
         try:
             encryptor = prpcrypt()
             sql_cnn = sqlite3.connect(os.getenv('JUPYTERHUB_SQLITEDB_PATH'))
-            #print("connect sqlite-db sucessfully")
+            print("connect sqlite-db sucessfully")
             cursor = sql_cnn.cursor()
-            sql = ("SELECT `password` FROM `users` WHERE `username` = '{}'").format(username)  # select from the database
-            # print(sql)
+            sql = ("SELECT `password` FROM users WHERE `username` = '{}'").format(username)  # select from the database
+            print(sql)
             cursor.execute(sql)
             user_password = cursor.fetchone()[0]  # first to check the username
-            #print(user_password)
+            print(user_password)
             input_password = encryptor.encrypt(password).decode()
-            #print(input_password)
-            #print(user_password == input_password)
+            print(input_password)
+            print(user_password == input_password)
             if user_password == input_password:
                 cursor.close()
                 sql_cnn.close()
                 return True
             else:
+
                 print("wrong database/username/password, "
                       "please check your JUPYTERHUB_SQLITEDB_PATH/username/password....")
                 cursor.close()
@@ -59,10 +60,11 @@ class SQLiteAuthenticator(Authenticator):
                 return False
         except:
             try:
+                traceback.print_exc()
                 cursor.close()
                 sql_cnn.close()
             except:
-                pass
+                traceback.print_exc()
             finally:
                 print("wrong database/username/password, "
                       "please check your JUPYTERHUB_SQLITEDB_PATH/username/password....")
