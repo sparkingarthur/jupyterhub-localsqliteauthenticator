@@ -34,28 +34,39 @@ class SQLiteAuthenticator(Authenticator):
         self.admin_mode = False
     def _verify_password(self, username, password):
         #connect to the sqlite-db
-        encryptor = prpcrypt()
-        sql_cnn = sqlite3.connect(os.getenv('JUPYTERHUB_SQLITEDB_PATH'))
-        #print("connect sqlite-db sucessfully")
-        cursor = sql_cnn.cursor()
-        sql = ("SELECT `password` FROM `users` WHERE `username` = '{}'").format(username)  # select from the database
-        # print(sql)
-        cursor.execute(sql)
-        user_password = cursor.fetchone()[0]  # first to check the username
-        #print(user_password)
-        input_password = encryptor.encrypt(password).decode()
-        #print(input_password)
-        #print(user_password == input_password)
-        if user_password == input_password:
-            cursor.close()
-            sql_cnn.close()
-            return True
-        else:
-            print("wrong database/username/password, "
-                  "please check your JUPYTERHUB_SQLITEDB_PATH/username/password....")
-            cursor.close()
-            sql_cnn.close()
-            return False
+        try:
+            encryptor = prpcrypt()
+            sql_cnn = sqlite3.connect(os.getenv('JUPYTERHUB_SQLITEDB_PATH'))
+            #print("connect sqlite-db sucessfully")
+            cursor = sql_cnn.cursor()
+            sql = ("SELECT `password` FROM `users` WHERE `username` = '{}'").format(username)  # select from the database
+            # print(sql)
+            cursor.execute(sql)
+            user_password = cursor.fetchone()[0]  # first to check the username
+            #print(user_password)
+            input_password = encryptor.encrypt(password).decode()
+            #print(input_password)
+            #print(user_password == input_password)
+            if user_password == input_password:
+                cursor.close()
+                sql_cnn.close()
+                return True
+            else:
+                print("wrong database/username/password, "
+                      "please check your JUPYTERHUB_SQLITEDB_PATH/username/password....")
+                cursor.close()
+                sql_cnn.close()
+                return False
+        except:
+            try:
+                cursor.close()
+                sql_cnn.close()
+            except:
+                pass
+            finally:
+                print("wrong database/username/password, "
+                      "please check your JUPYTERHUB_SQLITEDB_PATH/username/password....")
+                return False
 
     @gen.coroutine
     def authenticate(self, handler, data):
