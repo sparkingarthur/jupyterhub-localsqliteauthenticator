@@ -21,3 +21,6 @@ oldname = './jupyterhub-users.db'
 newname = '/etc/jupyterhub/jupyterhub-users.db'
 if not os.path.exists(newname):
     shutil.copyfile(oldname,newname)
+	
+if not os.path.exists('/home/admin'):
+    os.makedirs('/home/admin')

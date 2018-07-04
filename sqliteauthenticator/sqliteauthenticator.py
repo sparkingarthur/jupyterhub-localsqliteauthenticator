@@ -2,6 +2,7 @@
 from jupyterhub.auth import Authenticator
 from tornado import gen
 
+
 import os
 import sys
 from Crypto.Cipher import AES
@@ -28,8 +29,8 @@ class prpcrypt():
 
 
 class SQLiteAuthenticator(Authenticator):
-    def __init__(self):
-        super(SQLiteAuthenticator,self).__init__()
+    def __init__(self, **kwargs):
+        super(SQLiteAuthenticator, self).__init__(**kwargs)
         self.admin_mode = False
     def _verify_password(self, username, password):
         #connect to the sqlite-db
