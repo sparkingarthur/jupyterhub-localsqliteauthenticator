@@ -24,8 +24,8 @@ with open(filename,"r") as f:
             username = user.strip()
             print("delete user: %s"%(username))
             authenticator.sqlite_delete_user(username=username)  # password
-            os.system('rm -rf /home/%s' % (username))
-            os.system('rm -rf /var/spool/mail/%s' % (username))
-            os.system('userdel %s ' % (username))
+            # os.system('rm -rf /home/%s' % (username))
+            # os.system('rm -rf /var/spool/mail/%s' % (username))
+            # os.system('userdel %s ' % (username))
     except:
         traceback.print_exc()
