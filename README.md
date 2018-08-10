@@ -21,7 +21,10 @@ e.g.
 ```
 export JUPYTERHUB_SQLITEDB_PATH=/etc/jupyterhub/jupyterhub-users.db 
 ```
-
+or you can do this in your python script like this:
+```
+os.environ["JUPYTERHUB_SQLITEDB_PATH"]="/etc/jupyterhub/jupyterhub-users.db"
+```
 ## Usage
 
 The database defined in `JUPYTERHUB_SQLITEDB_PATH` should have a table called `users` which has columns `username` and `password`.
