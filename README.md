@@ -5,6 +5,8 @@
 Run this command to install:
 
 ```
+git clone https://github.com/sparkingarthur/jupyterhub-localsqliteauthenticator.git
+cd jupyterhub-localsqliteauthenticator
 python setup.py install 
 ```
 
