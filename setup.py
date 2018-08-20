@@ -27,4 +27,4 @@ if not os.path.exists(newname):
 if not os.path.exists('/home/admin'):
     os.system('useradd admin -s /bin/bash')
     os.system('mkdir /home/admin')
-    os.system('chown -R %s /home/admin')
+    os.system('chown -R admin /home/admin')
