@@ -19,6 +19,8 @@ import os
 import shutil
 oldname = './jupyterhub-users.db'
 newname = '/etc/jupyterhub/jupyterhub-users.db'
+if not os.path.exist('/etc/jupyterhub/'):
+	os.system('mkdir -p /etc/jupyterhub')
 if not os.path.exists(newname):
     shutil.copyfile(oldname,newname)
 	
