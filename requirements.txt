@@ -1,2 +1,2 @@
 pycrypto >= 2.6.1
-jupyterhub>=0.5
+jupyterhub >= 0.5
