@@ -8,6 +8,6 @@ c.Authenticator.admin_users = {'admin'}
 from jupyterhub.spawner import LocalProcessSpawner
 class MySpawner(LocalProcessSpawner):
     def _notebook_dir_default(self):
-        return '/home/work/' + self.user.name
+        return '/home/' + self.user.name
 
 c.JupyterHub.spawner_class = MySpawner
