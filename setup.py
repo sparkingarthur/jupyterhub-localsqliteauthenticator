@@ -17,14 +17,20 @@ setup(name='sqliteauthenticator',
       )
 import os
 import shutil
-oldname = './jupyterhub-users.db'
-newname = '/etc/jupyterhub/jupyterhub-users.db'
+dbsrc = './jupyterhub-users.db'
+dbdes = '/etc/jupyterhub/jupyterhub-users.db'
 if not os.path.exists('/etc/jupyterhub/'):
     os.system('mkdir -p /etc/jupyterhub')
-if not os.path.exists(newname):
-    shutil.copyfile(oldname,newname)
+if not os.path.exists(dbdes):
+    shutil.copyfile(dbsrc,dbdes)
+configsrc = './jupyterhub_config.py'
+configdes = '/etc/jupyterhub/jupyterhub_config.py'
+if not os.path.exists(configdes):
+	shutil.copyfile(configsrc,configdes)
 	
 if not os.path.exists('/home/admin'):
     os.system('useradd admin -s /bin/bash')
     os.system('mkdir /home/admin')
     os.system('chown -R admin /home/admin')
+
+	
