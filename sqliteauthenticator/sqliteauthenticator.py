@@ -101,7 +101,7 @@ class SQLiteAuthenticator(LocalAuthenticator):
             sql_cnn.commit()
             c.close()
             sql_cnn.close()
-            userpath = ('/home/work/{}').format(username)
+            userpath = ('/home/{}').format(username)
             if not os.path.exists(userpath): #in case add_user in jupyterhub failed
                 os.system('useradd %s -s /bin/bash' % (username))
                 os.system('mkdir -p /home/%s' % (username))
