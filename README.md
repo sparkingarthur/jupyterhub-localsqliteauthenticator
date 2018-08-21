@@ -28,7 +28,11 @@ or you can do this in your python script like this:
 os.environ["JUPYTERHUB_SQLITEDB_PATH"]="/etc/jupyterhub/jupyterhub-users.db"
 ```
 ## Usage
-
+you need to change your config file firstly.
+Then run jupyterhub as :
+```
+jupyterhub -f /etc/jupyterhub/jupyterhub_config.py
+```
 The database defined in `JUPYTERHUB_SQLITEDB_PATH` should have a table called `users` which has columns `username` and `password`.
 
 - `username` should contain the plaintext username to be used by Jupyterhub
