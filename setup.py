@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='sqliteauthenticator',
-      version='0.1',
+      version='0.11',
       description='SQLite Authenticator for Jupyterhub',
       author='sparkingarthur',
       license='MIT',
